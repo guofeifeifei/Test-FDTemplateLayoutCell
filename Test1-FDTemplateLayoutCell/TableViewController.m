@@ -90,10 +90,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+   //普通的计算高度，不进行缓存
     return [tableView fd_heightForCellWithIdentifier:@"cellIdentifier" configuration:^(TableViewCell *cell) {
           [self configureCell:cell atIndexPath:indexPath];
     }];
+    
+//    //根据数据源里你的自定key进行缓存高度
+//    return [tableView fd_heightForCellWithIdentifier:@"MyCell" cacheByKey:@"yourKey" configuration:^(id cell) {
+//        [self configureCell:cell atIndexPath:indexPath];
+//    }];
+//
+//    //根据indexPath进行缓存高度
+//    return [tableView fd_heightForCellWithIdentifier:@"MyCell" cacheByIndexPath:indexPath configuration:^(id cell) {
+//        [self configureCell:cell atIndexPath:indexPath];
+//    }];
+    
+    
 }
 - (void)configureCell:(TableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     //使用Masonry进行布局的话，这里要设置为NO
