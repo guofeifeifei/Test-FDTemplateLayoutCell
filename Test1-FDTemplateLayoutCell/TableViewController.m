@@ -88,8 +88,11 @@
      [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 180;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //方法一
    //普通的计算高度，不进行缓存
     return [tableView fd_heightForCellWithIdentifier:@"cellIdentifier" configuration:^(TableViewCell *cell) {
           [self configureCell:cell atIndexPath:indexPath];
@@ -105,7 +108,9 @@
 //        [self configureCell:cell atIndexPath:indexPath];
 //    }];
     
-    
+    //方法二
+    //或者使用,当时有UITableViewAutomaticDimension时候estimatedHeightForRowAtIndexPath方法一定要实现，否则页面会卡顿
+     //  return UITableViewAutomaticDimension;
 }
 - (void)configureCell:(TableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     //使用Masonry进行布局的话，这里要设置为NO
